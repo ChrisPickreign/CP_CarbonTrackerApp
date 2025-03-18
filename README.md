@@ -19,6 +19,8 @@ The **Carbon Tracker App** is a modern **Vite + React** application designed to 
 - **🎨 Tailwind CSS** – Utility-first styling for rapid development.
 - **📊 Chart.js / Recharts** (Optional) – For interactive visualizations.
 - **🗄️ Local Storage API** – To persist user data.
+- **🧩 ShadCN/UI** – Prebuilt, customizable UI components for a seamless design experience.
+
 
 ---
 
@@ -58,6 +60,4 @@ The app is styled using **Tailwind CSS**. Classes are applied directly within JS
   This generates an optimized version of the app in the `dist/` folder.
 
 ---
-
-💚 **Join us in making a greener planet!** 🌍♻️  
 *Developed with Vite, React, and Tailwind CSS.*
