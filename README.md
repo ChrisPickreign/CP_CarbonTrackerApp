@@ -10,6 +10,7 @@ The **Carbon Tracker App** is a modern **Vite + React** application designed to 
 - **🎯 Goal Setting:** Set personal **carbon reduction goals** and track progress with **motivational feedback**.
 - **🔔 Notifications:** Get **reminders** to log daily activities and maintain accuracy in tracking.
 - **🎨 Customizable UI:** Personalize the app’s **theme and layout** for a tailored experience.
+- **🧩 ShadCN/UI** – Prebuilt, customizable UI components for a seamless design experience.
 - **💾 Local Storage:** Your data is **saved in the browser**, ensuring **privacy and offline access**.
 
 ## 🛠️ Tech Stack
