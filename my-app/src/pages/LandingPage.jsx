@@ -22,11 +22,6 @@ const LandingPage = () => {
           Get Started
         </a>
       </div>
-
-      {/* Footer */}
-      <footer className="absolute bottom-4 text-sm opacity-80">
-        Made with 💚 for a Greener Future
-      </footer>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -10,11 +11,21 @@ const NavBar = () => {
         {/* Navigation Links */}
         <nav>
           <ul className="flex space-x-6 text-lg">
-            <li className="hover:underline cursor-pointer">Summary Views</li>
-            <li className="hover:underline cursor-pointer">Goal Setting</li>
-            <li className="hover:underline cursor-pointer">Notifications</li>
-            <li className="hover:underline cursor-pointer">Customizable UI</li>
-            <li className="hover:underline cursor-pointer">Local Storage</li>
+            <li className="hover:underline cursor-pointer">
+              <Link to="/">🏠 Home</Link>
+            </li>
+            <li className="hover:underline cursor-pointer">
+              <Link to="/feature1">🔹 Feature 1</Link>
+            </li>
+            <li className="hover:underline cursor-pointer">
+              <Link to="/feature2">🔹 Feature 2</Link>
+            </li>
+            <li className="hover:underline cursor-pointer">
+              <Link to="/feature3">🔹 Feature 3</Link>
+            </li>
+            <li className="hover:underline cursor-pointer">
+              <Link to="/dashboard">📊 Summary</Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -23,4 +34,5 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
 
