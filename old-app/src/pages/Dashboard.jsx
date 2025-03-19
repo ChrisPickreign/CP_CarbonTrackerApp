@@ -65,12 +65,10 @@ const Dashboard = () => {
     <div className="max-w-4xl mx-auto mt-24 p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-3xl font-bold text-center text-green-600 mb-6">📊 Carbon Footprint Summary</h2>
 
-      {/* Chart Display */}
       <div className="mb-6">
         <Line data={chartData} />
       </div>
-
-      {/* Add New Entry */}
+      
       <div className="flex gap-2 justify-center">
         <input
           type="number"
@@ -81,7 +79,7 @@ const Dashboard = () => {
         />
         <button
           onClick={handleAddEntry}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          className="bg-white-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
           Add Entry
         </button>

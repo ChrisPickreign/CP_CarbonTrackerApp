@@ -1,8 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"], // Ensure Tailwind scans these files
+  darkMode: "media",
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/components/**/*.{js,jsx,ts,tsx}",
+    "./src/pages/**/*.{js,jsx,ts,tsx}"
+  ],
   theme: {
-    extend: {}, // Customize if needed
+    extend: {},
   },
-  plugins: [], // You can add plugins later
+  plugins: [
+    require("tailwindcss-animate"), 
+  ],
 };

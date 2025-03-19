@@ -2,27 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tailwind Plugin */
-@plugin "tailwindcss-animate";
-
-/* Global Dark Mode Variant */
-@custom-variant dark (&:is(.dark *));
-
 /* 🌱 Light Green Background Applied to Entire App */
 body {
-  @apply bg-green-100 text-gray-900;
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: #16a347;
 }
 
 /* Links */
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #1a2095;
   text-decoration: inherit;
 }
 a:hover {
@@ -72,10 +66,8 @@ button:focus-visible {
 /* Base Styles */
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-green-100 text-gray-900;
+    border: 1px solid var(--tw-border-color);
+    outline: 0.5px solid rgba(186, 183, 183, 0.5);
   }
 }
 
