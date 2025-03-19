@@ -9,7 +9,6 @@ import {
 import { cn } from "@/lib/utils"; // Ensure this utility function exists
 
 const navLinks = [
-  { title: "Overview", href: "/" },
   { title: "Activity Logging", href: "/activity" },
   { title: "Summary Views", href: "/dashboard" },
   { title: "Goal Setting", href: "/goals" },
