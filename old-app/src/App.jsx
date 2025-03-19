@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <ShadNavBar />
-      <main className="pt-[100px] flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <main className="w-screen h-screen flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/dashboard" element={<Dashboard />} />

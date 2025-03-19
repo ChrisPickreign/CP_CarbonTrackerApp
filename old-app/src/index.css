@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html, #root {
+  width: 100vw;
+  height: 100vh;
+  /* margin: 10%; */
+  padding: 1%;
+  /* padding-left: 10%; */
+  /* padding-right: 10%; */
+  overflow: hidden;
+}
+
 /* 🌱 Light Green Background Applied to Entire App */
 body {
   margin: 0;

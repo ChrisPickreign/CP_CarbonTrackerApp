@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement } from "chart.js";
+import { Button, buttonVariants } from '../components/ui/button';
 
 // Register necessary components for Chart.js
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
@@ -68,7 +69,7 @@ const Dashboard = () => {
       <div className="mb-6">
         <Line data={chartData} />
       </div>
-      
+
       <div className="flex gap-2 justify-center">
         <input
           type="number"
