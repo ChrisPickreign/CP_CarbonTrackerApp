@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Goals from "./pages/Goals";
 import Resources from "./pages/Resources";
 import Activity from "./pages/Activity";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/resources" element={<Resources />} />
         </Routes>
       </main>
+      <Footer />
     </Router>
   );
 }

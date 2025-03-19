@@ -2,82 +2,149 @@
 @tailwind components;
 @tailwind utilities;
 
-html, #root {
+/* ✅ Ensure full width and height for the app */
+html, body, #root {
   width: 100vw;
   height: 100vh;
-  /* margin: 10%; */
-  padding: 1%;
-  /* padding-left: 10%; */
-  /* padding-right: 10%; */
-  overflow: hidden;
-}
-
-/* 🌱 Light Green Background Applied to Entire App */
-body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  overflow: hidden;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: #16a347;
+  background-color: #f4f4f4;
 }
 
-/* Links */
-a {
-  font-weight: 500;
-  color: #1a2095;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-/* Headings */
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-/* Buttons */
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* ✅ Navigation Bar */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Kept the original navbar height */
+  background-color: #055529;
+  color: rgb(19, 17, 17);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 50;
 }
 
-/* 🌙 Dark Mode */
+/* ✅ Ensure navbar items are properly spaced */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* ✅ Navbar list: removes bullet points and spaces items */
+nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ✅ Navbar links: Adjusted text size to be 25% smaller */
+.nav-link {
+  text-decoration: none; /* Remove underline */
+  color: white; /* Set text color to white */
+  font-size: 0.85rem; /* Reduced size (was 1.0rem) */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between text and logo */
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #a0aec0; /* Slight color change on hover */
+}
+
+/* ✅ Content Below Navbar */
+main {
+  padding-top: 80px; /* Ensures content is pushed below the fixed navbar */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ✅ Dark Mode */
 @media (prefers-color-scheme: dark) {
-  :root {
-    color: #ffffff;
+  body {
     background-color: #1a1a1a;
+    color: #ffffff;
   }
-  a:hover {
-    color: #747bff;
+  header {
+    background-color: #0d1117;
   }
-  button {
-    background-color: #333;
+  nav a:hover {
+    color: #cccccc;
   }
 }
 
-/* Base Styles */
-@layer base {
-  * {
-    border: 1px solid var(--tw-border-color);
-    outline: 0.5px solid rgba(186, 183, 183, 0.5);
-  }
+/* ✅ Global Footer Styling - Increased height by 25% */
+.global-footer {
+  background-color: #166534; /* Same green as navbar */
+  color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 44px; /* Increased by 25% (original was 35px) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 50;
 }
+
+/* ✅ Footer Container */
+.footer-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* ✅ Footer Logo */
+.footer-logo {
+  font-size: 22.5px; /* Increased by 25% (original was 18px) */
+  font-weight: bold;
+}
+
+/* ✅ Footer Links */
+.footer-links {
+  display: flex;
+  gap: 15px;
+}
+
+/* ✅ Footer Link Styling */
+.footer-link {
+  color: white;
+  text-decoration: none;
+  font-size: 17.5px; /* Increased by 25% (original was 14px) */
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #a3e635; /* Lighter green hover effect */
+}
+
+/* ✅ Logo Styling for Header */
+.nav-logo-img {
+  width: 30px; /* Logo size remains the same */
+  height: 30px;
+}
+
+/* ✅ Logo Styling for Footer */
+.footer-logo-img {
+  width: 25px; /* Logo size remains the same */
+  height: 25px;
+}
+
+
 
