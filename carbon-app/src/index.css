@@ -155,6 +155,9 @@ main {
   width: 90%;
   max-width: 800px;
   text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* ✅ Table Title */
@@ -216,5 +219,3 @@ main {
 .tracking-table td {
   padding: 8px;
 }
-
-

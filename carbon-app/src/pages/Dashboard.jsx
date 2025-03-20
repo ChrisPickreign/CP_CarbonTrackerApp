@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement } from "chart.js";
-import { Button, buttonVariants } from '../components/ui/button';
+import { useLocation } from "react-router-dom"; // Detects tab changes
+import { Button } from "../components/ui/button";
 
 // Register necessary components for Chart.js
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
@@ -10,31 +11,37 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 const carbonReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ENTRY":
-      return [...state, action.payload];
+      const updatedData = [...state, action.payload];
+      localStorage.setItem("carbonData", JSON.stringify(updatedData)); // Store in localStorage
+      return updatedData;
+    case "LOAD_ENTRIES":
+      return action.payload;
     default:
       return state;
   }
 };
 
-const Dashboard = () => {
-  // State for tracking carbon data
-  const [carbonData, dispatch] = useReducer(carbonReducer, []);
+const Dashboard = ({ activityEntries }) => {
+  const location = useLocation(); // Detects navigation changes
+  const [carbonData, dispatch] = useReducer(carbonReducer, [], () => {
+    const storedData = localStorage.getItem("carbonData");
+    return storedData ? JSON.parse(storedData) : [];
+  });
 
-  // Dummy data to simulate carbon tracking (in kg)
-  const [newEntry, setNewEntry] = useState("");
-
-  // Simulate adding daily carbon footprint data
   useEffect(() => {
-    const initialData = [
-      { date: "2024-03-12", value: 2.3 },
-      { date: "2024-03-13", value: 2.8 },
-      { date: "2024-03-14", value: 3.1 },
-      { date: "2024-03-15", value: 2.5 },
-    ];
-    initialData.forEach((entry) =>
-      dispatch({ type: "ADD_ENTRY", payload: entry })
-    );
-  }, []);
+    if (activityEntries.length > 0) {
+      activityEntries.forEach((entry) => {
+        dispatch({ type: "ADD_ENTRY", payload: { date: entry.date, value: parseFloat(entry.co2Used) } });
+      });
+    }
+  }, [activityEntries]);
+
+  useEffect(() => {
+    const storedEntries = JSON.parse(localStorage.getItem("carbonData"));
+    if (storedEntries) {
+      dispatch({ type: "LOAD_ENTRIES", payload: storedEntries });
+    }
+  }, [location.pathname]); // Ensures data persists across navigation
 
   // Chart.js Data Configuration
   const chartData = {
@@ -51,17 +58,6 @@ const Dashboard = () => {
     ],
   };
 
-  // Handle adding a new carbon entry
-  const handleAddEntry = () => {
-    if (newEntry) {
-      dispatch({
-        type: "ADD_ENTRY",
-        payload: { date: new Date().toISOString().split("T")[0], value: parseFloat(newEntry) },
-      });
-      setNewEntry("");
-    }
-  };
-
   return (
     <div className="max-w-4xl mx-auto mt-24 p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-3xl font-bold text-center text-green-600 mb-6">📊 Carbon Footprint Summary</h2>
@@ -69,24 +65,9 @@ const Dashboard = () => {
       <div className="mb-6">
         <Line data={chartData} />
       </div>
-
-      <div className="flex gap-2 justify-center">
-        <input
-          type="number"
-          placeholder="Enter daily CO₂ (kg)"
-          className="border rounded p-2 w-40"
-          value={newEntry}
-          onChange={(e) => setNewEntry(e.target.value)}
-        />
-        <button
-          onClick={handleAddEntry}
-          className="bg-white-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Add Entry
-        </button>
-      </div>
     </div>
   );
 };
 
 export default Dashboard;
+

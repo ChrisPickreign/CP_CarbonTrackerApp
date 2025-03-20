@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import TrackingTable from "@/components/TrackingTable";
 
-const Activity = () => {
-    return (
-        <div>
-            <TrackingTable/>
-        </div>
-    );
+const Activity = ({ entries, setEntries }) => {
+  return (
+    <div>
+      <TrackingTable entries={entries} setEntries={setEntries} />
+    </div>
+  );
 };
 
 export default Activity;

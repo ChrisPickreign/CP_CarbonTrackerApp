@@ -1,14 +1,28 @@
 import React, { useState } from "react";
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-const TrackingTable = () => {
-  const [entries, setEntries] = useState([]);
+const TrackingTable = ({ entries, setEntries }) => {
+  const [showAlert, setShowAlert] = useState(false);
   const [newEntry, setNewEntry] = useState({
     activity: "",
     date: new Date(),
@@ -17,20 +31,32 @@ const TrackingTable = () => {
   });
 
   const handleAddEntry = () => {
-    if (!newEntry.activity || !newEntry.co2Used) return;
+    if (!newEntry.activity || !newEntry.co2Used) {
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 5000);
+      return;
+    }
     setEntries([...entries, newEntry]);
-    setNewEntry({ activity: "Please Choose an Activity", date: new Date(), location: "", co2Used: "" });
+    setNewEntry({ activity: "", date: new Date(), location: "", co2Used: "" });
   };
 
   return (
     <div className="tracking-table-container">
       <h2 className="tracking-table-title">🌍 Carbon Footprint Activity Tracker</h2>
 
+      {showAlert && (
+        <Alert variant="destructive" className="tracking-alert">
+          <AlertTitle>⚠️ Error</AlertTitle>
+          <AlertDescription>Please make sure all input fields are filled out.</AlertDescription>
+        </Alert>
+      )}
+
       {/* Data Table */}
       <Table className="tracking-table">
         <TableHeader>
           <TableRow>
-            <TableHead>Please Choose an Activity</TableHead>
             <TableHead>Activity</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Location</TableHead>
@@ -50,10 +76,10 @@ const TrackingTable = () => {
       </Table>
 
       {/* Input Form */}
-      <div className="tracking-table-inputs">
+      <div className="tracking-table-inputs mt-4">
         {/* Activity Dropdown */}
         <Select onValueChange={(value) => setNewEntry({ ...newEntry, activity: value })}>
-          <SelectTrigger className="tracking-table-select">
+          <SelectTrigger className="tracking-table-select bg-green-100">
             <SelectValue placeholder="Select Activity" />
           </SelectTrigger>
           <SelectContent>
@@ -67,7 +93,7 @@ const TrackingTable = () => {
         {/* Date Picker */}
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline" className="tracking-table-date-btn">
+            <Button variant="outline" className="tracking-table-date-btn bg-green-100">
               {newEntry.date ? format(newEntry.date, "PPP") : "Pick a date"}
             </Button>
           </PopoverTrigger>
@@ -108,3 +134,4 @@ const TrackingTable = () => {
 };
 
 export default TrackingTable;
+
