@@ -67,7 +67,7 @@ const TrackingTable = ({ entries, setEntries }) => {
           {entries.map((entry, index) => (
             <TableRow key={index}>
               <TableCell>{entry.activity}</TableCell>
-              <TableCell>{format(entry.date, "PPP")}</TableCell>
+              <TableCell>{format(entry.date, "yyyy-MM-dd")}</TableCell>
               <TableCell>{entry.location}</TableCell>
               <TableCell>{entry.co2Used} kg</TableCell>
             </TableRow>
@@ -94,7 +94,7 @@ const TrackingTable = ({ entries, setEntries }) => {
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="outline" className="tracking-table-date-btn bg-green-100">
-              {newEntry.date ? format(newEntry.date, "PPP") : "Pick a date"}
+              {newEntry.date ? format(newEntry.date, "yyyy-MM-dd") : "Pick a date"}
             </Button>
           </PopoverTrigger>
           <PopoverContent align="start">

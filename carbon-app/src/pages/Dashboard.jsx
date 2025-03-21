@@ -3,6 +3,7 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement } from "chart.js";
 import { useLocation } from "react-router-dom"; // Detects tab changes
 import { Button } from "../components/ui/button";
+import { format } from "date-fns";
 
 // Register necessary components for Chart.js
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
@@ -28,10 +29,24 @@ const Dashboard = ({ activityEntries }) => {
     return storedData ? JSON.parse(storedData) : [];
   });
 
+  // Initialize with zero point at (0,0)
+  useEffect(() => {
+    if (carbonData.length === 0) {
+      dispatch({ type: "ADD_ENTRY", payload: { date: "2025-01-01", value: 0 } });
+    }
+  }, []);
+
+  // Sync activity log with dashboard chart
   useEffect(() => {
     if (activityEntries.length > 0) {
       activityEntries.forEach((entry) => {
-        dispatch({ type: "ADD_ENTRY", payload: { date: entry.date, value: parseFloat(entry.co2Used) } });
+        dispatch({
+          type: "ADD_ENTRY",
+          payload: {
+            date: format(new Date(entry.date), "yyyy-MM-dd"), // Format to YYYY-MM-DD
+            value: parseFloat(entry.co2Used),
+          },
+        });
       });
     }
   }, [activityEntries]);
@@ -53,21 +68,39 @@ const Dashboard = ({ activityEntries }) => {
         fill: false,
         backgroundColor: "rgba(34, 197, 94, 1)", // Green
         borderColor: "rgba(34, 197, 94, 0.6)",
-        tension: 0.2,
+        pointRadius: 5, // Ensures points are visible
+        tension: 0, // Prevents curve smoothing
       },
     ],
   };
 
+  const chartOptions = {
+    scales: {
+      y: {
+        beginAtZero: true, // Ensure y-axis starts at 0
+      },
+      x: {
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 10,
+        },
+      },
+    },
+  };
+
   return (
     <div className="max-w-4xl mx-auto mt-24 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-3xl font-bold text-center text-green-600 mb-6">📊 Carbon Footprint Summary</h2>
+      <h2 className="text-3xl font-bold text-center text-green-600 mb-6">
+        📊 Carbon Footprint Summary
+      </h2>
 
       <div className="mb-6">
-        <Line data={chartData} />
+        <Line data={chartData} options={chartOptions} />
       </div>
     </div>
   );
 };
 
 export default Dashboard;
+
 
