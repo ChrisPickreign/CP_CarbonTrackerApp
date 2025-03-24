@@ -34,15 +34,22 @@ const carbonReducer = (state, action) => {
 const Dashboard = ({ activityEntries }) => {
   const location = useLocation();
 
-  // Load carbon footprint data from localStorage
+  // Load carbon footprint data from localStorage, handling errors as well
   const [carbonData, dispatch] = useReducer(carbonReducer, [], () => {
-    const stored = localStorage.getItem("carbonData");
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      return parsed.length > 0 ? parsed : [{ date: "2025-01-01", value: 0 }];
+    try {
+      const stored = localStorage.getItem("carbonData");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        return Array.isArray(parsed) && parsed.length > 0
+          ? parsed
+          : [{ date: "2025-01-01", value: 0 }];
+      }
+    } catch (error) {
+      console.error("Error loading carbon data:", error);
     }
     return [{ date: "2025-01-01", value: 0 }];
   });
+  
 
   const addedEntries = useRef(
     new Set(carbonData.map((entry) => `${entry.date}-${entry.value}`))
@@ -67,13 +74,21 @@ const Dashboard = ({ activityEntries }) => {
     });
   }, [activityEntries]);
 
-  // Load data from localStorage on page change
+  // Load data from localStorage on page change, catching errors from local storage
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("carbonData"));
-    if (stored) {
-      dispatch({ type: "SET_ENTRIES", payload: stored });
+    try {
+      const stored = localStorage.getItem("carbonData");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          dispatch({ type: "SET_ENTRIES", payload: parsed });
+        }
+      }
+    } catch (error) {
+      console.error("Failed to parse carbonData from localStorage:", error);
     }
   }, [location.pathname]);
+  
 
   // Clear all entries
   const handleClear = () => {
