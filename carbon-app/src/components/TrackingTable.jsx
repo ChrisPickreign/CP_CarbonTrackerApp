@@ -154,15 +154,24 @@ const TrackingTable = ({ entries, setEntries }) => {
           className="tracking-table-input"
         />
 
-        <div>
-           {/* Add Entry Button */}
-        <Button onClick={handleAddEntry} className="tracking-table-add-btn">
-          ➕ Add Entry
+      <div className="tracking-table-button-group">
+        <Button
+          size="sm"
+          onClick={handleAddEntry}
+          className="tracking-table-btn"
+        >
+          ➕ Add
         </Button>
-        <Button variant="destructive" onClick={handleClearEntries} className="tracking-table-add-btn">
-          ❌ Clear All Entries
+        <Button
+          size="sm"
+          variant="destructive"
+          onClick={handleClearEntries}
+          className="tracking-table-btn"
+        >
+          ❌ Clear
         </Button>
-        </div>
+      </div>
+
       </div>
     </div>
   );

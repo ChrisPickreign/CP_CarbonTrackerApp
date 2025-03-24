@@ -6,11 +6,14 @@ The **Carbon Tracker App** is a modern **Vite + React** application designed to 
 
 ## ✨ Features Implemented
 
+- **📝 Activity Logging:** Input activites that automatically sync with a **visual dashboard** to track your carbon footprint over time.
 - **📊 Summary Views:** View a **visual dashboard** with interactive **charts and graphs** to track your carbon footprint over time.
-- **🎯 Goal Setting:** Set personal **carbon reduction goals** and track progress with **motivational feedback**.
-- **🔔 Notifications:** Get **reminders** to log daily activities and maintain accuracy in tracking.
-- **🎨 Customizable UI:** Personalize the app’s **theme and layout** for a tailored experience.
 - **💾 Local Storage:** Your data is **saved in the browser**, ensuring **privacy and offline access**.
+- **📈 Data Visualization:** View an **interactive chart** to visualize your carbon footprint and identify areas for improvement.
+- **🌿 Resource Library:** View practical tips and resources for sustainable living, encouraging users to adopt eco-friendly habits.
+
+
+
 
 ## 🛠️ Tech Stack
 

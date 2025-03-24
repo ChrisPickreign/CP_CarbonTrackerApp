@@ -123,21 +123,51 @@ const Dashboard = ({ activityEntries }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-24 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-3xl font-bold text-center text-green-600 mb-6">
-        📊 Carbon Footprint Summary
-      </h2>
-      <div className="mb-6">
-        <Line data={chartData} options={chartOptions} />
+    <div className="dashboard-container">
+      {/* 🧭 Left Side - Description */}
+      <div className="dashboard-info-box">
+        <h3 className="dashboard-info-title">🧭 How to Use This App</h3>
+        <p className="dashboard-info-text">
+          Begin your carbon tracking journey by using the <strong>Activity Logging</strong> tab.
+          Log daily activities such as transportation, food, or travel. Once added, these
+          entries will appear in the summary dashboard.
+        </p>
+        <p className="dashboard-info-text">
+          Click <strong>🔄 Sync</strong> to update the graph based on your current activity log.
+          Use <strong>❌ Clear</strong> to reset your progress and start fresh.
+        </p>
+        <p className="dashboard-info-text">
+          Your data is stored locally in your browser for privacy and offline access.
+        </p>
       </div>
 
-      <div className="flex justify-center gap-4">
-        <Button onClick={handleClear} className="bg-red-600 hover:bg-red-700 text-white">
-          Clear All Entries
-        </Button>
-        <Button onClick={handleSync} className="bg-green-600 hover:bg-green-700 text-white">
-          Sync Activity Log
-        </Button>
+      {/* 📊 Right Side - Graph */}
+      <div className="dashboard-graph-box">
+        <h2 className="text-3xl font-bold text-center text-green-600 mb-4">
+          📊 Carbon Footprint Summary
+        </h2>
+        <div className="mb-4">
+          <Line data={chartData} options={chartOptions} />
+        </div>
+
+        {/* Buttons */}
+        <div className="dashboard-button-group">
+          <Button
+            size="sm"
+            variant="destructive"
+            onClick={handleClear}
+            className="dashboard-btn"
+          >
+            ❌ Clear
+          </Button>
+          <Button
+            size="sm"
+            onClick={handleSync}
+            className="dashboard-btn bg-green-600 hover:bg-green-700 text-white"
+          >
+            🔄 Sync
+          </Button>
+        </div>
       </div>
     </div>
   );
