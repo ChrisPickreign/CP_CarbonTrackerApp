@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableHeader,
@@ -21,6 +21,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
+const LOCAL_STORAGE_KEY = "activityEntries";
+
 const TrackingTable = ({ entries, setEntries }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [newEntry, setNewEntry] = useState({
@@ -30,16 +32,44 @@ const TrackingTable = ({ entries, setEntries }) => {
     co2Used: "",
   });
 
+  // Load from localStorage on first render
+  useEffect(() => {
+    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored).map((entry) => ({
+        ...entry,
+        date: new Date(entry.date),
+      }));
+      setEntries(parsed);
+    }
+  }, [setEntries]);
+
+  // Save to localStorage on entries change
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(entries));
+  }, [entries]);
+
   const handleAddEntry = () => {
     if (!newEntry.activity || !newEntry.co2Used) {
       setShowAlert(true);
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 5000);
+      setTimeout(() => setShowAlert(false), 5000);
       return;
     }
-    setEntries([...entries, newEntry]);
-    setNewEntry({ activity: "", date: new Date(), location: "", co2Used: "" });
+
+    const updated = [...entries, newEntry];
+    setEntries(updated);
+    setNewEntry({
+      activity: "",
+      date: new Date(),
+      location: "",
+      co2Used: "",
+    });
+  };
+
+  // Clear localStorage on clear entries
+  const handleClearEntries = () => {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    setEntries([]);
   };
 
   return (
@@ -67,7 +97,7 @@ const TrackingTable = ({ entries, setEntries }) => {
           {entries.map((entry, index) => (
             <TableRow key={index}>
               <TableCell>{entry.activity}</TableCell>
-              <TableCell>{format(entry.date, "yyyy-MM-dd")}</TableCell>
+              <TableCell>{format(new Date(entry.date), "yyyy-MM-dd")}</TableCell>
               <TableCell>{entry.location}</TableCell>
               <TableCell>{entry.co2Used} kg</TableCell>
             </TableRow>
@@ -124,14 +154,18 @@ const TrackingTable = ({ entries, setEntries }) => {
           className="tracking-table-input"
         />
 
-        {/* Add Entry Button */}
+        <div>
+           {/* Add Entry Button */}
         <Button onClick={handleAddEntry} className="tracking-table-add-btn">
           ➕ Add Entry
         </Button>
+        <Button variant="destructive" onClick={handleClearEntries} className="tracking-table-add-btn">
+          ❌ Clear All Entries
+        </Button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default TrackingTable;
-
