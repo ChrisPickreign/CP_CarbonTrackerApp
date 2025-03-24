@@ -146,5 +146,76 @@ main {
   height: 25px;
 }
 
+/* ✅ Styling for the Tracking Table Container */
+.tracking-table-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
+/* ✅ Table Title */
+.tracking-table-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
 
+/* ✅ Input Form Section */
+.tracking-table-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* ✅ Dropdown & Inputs */
+.tracking-table-select, 
+.tracking-table-input, 
+.tracking-table-date-btn {
+  min-width: 150px;
+}
+
+/* ✅ Add Entry Button */
+.tracking-table-add-btn {
+  background-color: #166534;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.tracking-table-add-btn:hover {
+  background-color: #0f4229;
+}
+
+/* ✅ Table Styling */
+.tracking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* ✅ Table Headings */
+.tracking-table th {
+  background: #166534;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+/* ✅ Table Rows */
+.tracking-table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.tracking-table td {
+  padding: 8px;
+}

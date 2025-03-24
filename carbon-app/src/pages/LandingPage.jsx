@@ -4,7 +4,9 @@ const LandingPage = () => {
   return (
     <div>
         <h1>Landing Zone</h1>
-        <p>This is the Landing page...</p>
+        <p>Whatup foo...</p>
+        <p>Continue onward</p>
+        <p>Shrive</p>
     </div>
   );
 };
