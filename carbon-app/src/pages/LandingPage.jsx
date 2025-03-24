@@ -7,7 +7,7 @@ const LandingPage = () => {
       <div className="landing-box">
         <h1 className="landing-title">🌍 Welcome to the Carbon Tracker App</h1>
         <p className="landing-description">
-          The <strong>Carbon Tracker App</strong> is a modern <strong>Vite + React</strong> application designed to help users monitor and reduce their <strong>carbon footprint</strong>. Using an engaging and personalized interface, users can <strong>set goals, track emissions, receive reminders,</strong> and <strong>customize their experience</strong> while making eco-friendly lifestyle changes.
+          The <strong>Carbon Tracker App</strong> is a modern <strong>Vite + React</strong> application designed to help users monitor and reduce their <strong>carbon footprint</strong>. Using an engaging and personalized interface, users can <strong>track emission activities, view their progress over time,</strong> and learn how to make eco-friendly lifestyle changes.
         </p>
 
         <ul className="landing-features">
